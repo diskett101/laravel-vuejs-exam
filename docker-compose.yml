@@ -1,0 +1,40 @@
+version: '2'
+services:
+  # MYSQL
+  laravel_vuejs_exam_mysql:
+    container_name: laravel_vuejs_exam_mysql
+    image: mysql:5.7
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: laravel_vuejs_exam
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    restart: 'unless-stopped'
+
+  laravel_vuejs_exam_web_app:
+    container_name: laravel_vuejs_exam_web_app
+    image: img_laravel_vuejs_exam_web_app
+    build: .
+    ports:
+      - 8000:80
+    links:
+        - laravel_vuejs_exam_mysql
+    volumes:
+      - ./web-app/:/var/www/html
+
+  laravel_vuejs_exam_phpmyadmin:
+    container_name: laravel_vuejs_exam_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    links:
+      - laravel_vuejs_exam_mysql
+    ports:
+      - 4444:80
+    expose:
+      - 4444
+    environment:
+      PMA_HOST: laravel_vuejs_exam_mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
