@@ -47,11 +47,37 @@ class User extends Authenticatable
     public static $user_types = [
         'admin' => [
             'code' => 'admin',
-            'title' => 'Admin',
+            'name' => 'Admin',
         ],
         'default' => [
             'code' => 'default',
-            'title' => 'Default',
+            'name' => 'Default',
         ],
     ];
+
+    public function info()
+    {
+        return $this->hasOne('App\UserInfo', 'user_id');
+    }
+
+    public function scopeExcludeAdmins($query)
+    {
+        return $query->where('user_type', '<>', self::$user_types['admin']['code']);
+    }
+
+    public function scopeExcludeDeleted($query)
+    {
+        return $query->where('deleted_at', null);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->info->firstname} {$this->info->lastname}";
+    }
+
+    public function getTypeAttribute()
+    {
+        return self::$user_types[$this->user_type];
+    }
+
 }
