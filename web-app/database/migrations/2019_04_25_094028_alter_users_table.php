@@ -15,6 +15,7 @@ class AlterUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('name', 'username');
+            $table->string('user_type')->after('remember_token');
             $table->softDeletes();
         });
     }
@@ -28,6 +29,7 @@ class AlterUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('username', 'name');
+            $table->dropColumn('user_type');
             $table->dropSoftDeletes();
         });
     }

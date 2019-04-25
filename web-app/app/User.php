@@ -43,4 +43,15 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at',
     ];
+
+    public static $user_types = [
+        'admin' => [
+            'code' => 'admin',
+            'title' => 'Admin',
+        ],
+        'default' => [
+            'code' => 'default',
+            'title' => 'Default',
+        ],
+    ];
 }
