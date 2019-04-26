@@ -45,11 +45,11 @@
 <script>
 import endpoints from '../endpoints';
 import lang from '../lang';
+import {getToken} from '../functions';
 
 export default {
 	mounted() {
 		console.log('MAIN page');
-		console.log('ENDPOINTS', endpoints);
 	},
 	data() {
 		return {
@@ -60,15 +60,22 @@ export default {
 		}
 	},
 	created() {
+		if (!getToken()) {
+			window.location.href = '/login';
+		}
 		this.getListData();
 	},
 	methods: {
 		getListData(page = 1) {
-			axios.get(`${this.apiUrl}${page}`)
-				.then(({data}) => {
-					this.userData = data.data;
-					this.pageCount = data.meta.last_page;
-				});
+			axios({
+				method: 'get',
+				url: `${this.apiUrl}${page}`,
+				headers: {'Token': getToken()} 
+			})
+			.then(({data}) => {
+				this.userData = data.data;
+				this.pageCount = data.meta.last_page;
+			});
 		}
 	}
 }

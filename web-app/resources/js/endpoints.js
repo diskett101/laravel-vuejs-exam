@@ -1,5 +1,5 @@
 export default {
-	login_post: '',
+	login_post: '/api/login',
 	user_list: '/api/users?page=',
 	user_data: '/api/users',
 	user_create: 'api/users',

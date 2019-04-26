@@ -18,5 +18,8 @@
 	Route::get('/user/{any}', function () {
 	    return view('admin');
 	})->where('any', '.*');
+	Route::get('/login', function () {
+	    return view('admin');
+	})->where('any', '.*');
 // });
 
