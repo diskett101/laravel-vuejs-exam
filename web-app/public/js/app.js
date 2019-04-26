@@ -1822,7 +1822,8 @@ __webpack_require__.r(__webpack_exports__);
       lang: _lang__WEBPACK_IMPORTED_MODULE_1__["default"],
       userData: [],
       pagecount: 1,
-      apiUrl: _endpoints__WEBPACK_IMPORTED_MODULE_0__["default"].user_list
+      apiUrl: _endpoints__WEBPACK_IMPORTED_MODULE_0__["default"].user_list,
+      apiUrlDelete: _endpoints__WEBPACK_IMPORTED_MODULE_0__["default"].user_delete
     };
   },
   created: function created() {
@@ -1848,6 +1849,25 @@ __webpack_require__.r(__webpack_exports__);
         _this.userData = data.data;
         _this.pageCount = data.meta.last_page;
       });
+    },
+    removeItem: function removeItem(userId) {
+      var _this2 = this;
+
+      if (confirm("Delete item?")) {
+        axios({
+          method: 'delete',
+          url: "".concat(this.apiUrlDelete, "/").concat(userId),
+          headers: {
+            'Token': Object(_functions__WEBPACK_IMPORTED_MODULE_2__["getToken"])()
+          }
+        }).then(function (_ref2) {
+          var data = _ref2.data;
+
+          _this2.getListData();
+        });
+      }
+
+      console.log('userId', userId);
     }
   }
 });
@@ -1974,6 +1994,178 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UserFormCreate.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UserFormCreate.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _endpoints__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../endpoints */ "./resources/js/endpoints.js");
+/* harmony import */ var _lang__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lang */ "./resources/js/lang.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../functions */ "./resources/js/functions.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('this.$route.params', this.$route.params);
+  },
+  data: function data() {
+    return {
+      lang: _lang__WEBPACK_IMPORTED_MODULE_1__["default"],
+      errors: {},
+      saved: false,
+      userData: {},
+      apiUrlPost: _endpoints__WEBPACK_IMPORTED_MODULE_0__["default"].user_create,
+      userId: null
+    };
+  },
+  created: function created() {
+    if (!Object(_functions__WEBPACK_IMPORTED_MODULE_2__["getToken"])()) {
+      window.location.href = '/login';
+    } // this.getUserData(this.$route.params.user_id);
+
+  },
+  methods: {
+    // getUserData(userId) {
+    // 	this.userId = userId;
+    // 	axios({
+    // 		method: 'get',
+    // 		url: `${this.apiUrlGet}/${this.userId}`,
+    // 		headers: {'Token': getToken()} 
+    // 	})
+    // 	.then(({data}) => {
+    // 		this.userData = data.data;
+    // 	});
+    // },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.saved = false;
+      axios({
+        method: 'post',
+        url: this.apiUrlPost,
+        headers: {
+          'Token': Object(_functions__WEBPACK_IMPORTED_MODULE_2__["getToken"])()
+        },
+        data: this.userData
+      }).then(function (_ref) {
+        var data = _ref.data;
+        return _this.setSuccessMessage(data);
+      })["catch"](function (_ref2) {
+        var response = _ref2.response;
+        return _this.setErrors(response);
+      });
+    },
+    setErrors: function setErrors(response) {
+      console.log('ERROR RESPONSE', response);
+      this.errors = response.data.error;
+    },
+    setSuccessMessage: function setSuccessMessage(data) {
+      console.log('response data', data);
+      this.errors = {};
+      this.saved = true;
+      alert('User added.');
+      window.location.href = '/user-list';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UserFormEdit.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UserFormEdit.vue?vue&type=script&lang=js& ***!
@@ -1985,6 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _endpoints__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../endpoints */ "./resources/js/endpoints.js");
 /* harmony import */ var _lang__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lang */ "./resources/js/lang.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../functions */ "./resources/js/functions.js");
 //
 //
 //
@@ -2009,6 +2202,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2018,7 +2278,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       lang: _lang__WEBPACK_IMPORTED_MODULE_1__["default"],
-      errors: [],
+      errors: {},
       saved: false,
       userData: {},
       apiUrlGet: _endpoints__WEBPACK_IMPORTED_MODULE_0__["default"].user_data,
@@ -2027,6 +2287,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    if (!Object(_functions__WEBPACK_IMPORTED_MODULE_2__["getToken"])()) {
+      window.location.href = '/login';
+    }
+
     this.getUserData(this.$route.params.user_id);
   },
   methods: {
@@ -2034,32 +2298,46 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.userId = userId;
-      console.log('API URL', "".concat(this.apiUrlGet, "/").concat(userId));
-      axios.get("".concat(this.apiUrlGet, "/").concat(userId)).then(function (_ref) {
+      axios({
+        method: 'get',
+        url: "".concat(this.apiUrlGet, "/").concat(this.userId),
+        headers: {
+          'Token': Object(_functions__WEBPACK_IMPORTED_MODULE_2__["getToken"])()
+        }
+      }).then(function (_ref) {
         var data = _ref.data;
-        console.log('data', data);
         _this.userData = data.data;
-        console.log('this.userData', _this.userData);
       });
     },
     onSubmit: function onSubmit() {
       var _this2 = this;
 
       this.saved = false;
-      axios.put(this.apiUrlPut, this.signature).then(function (_ref2) {
+      axios({
+        method: 'put',
+        url: "".concat(this.apiUrlPut, "/").concat(this.userId),
+        headers: {
+          'Token': Object(_functions__WEBPACK_IMPORTED_MODULE_2__["getToken"])()
+        },
+        data: this.userData
+      }).then(function (_ref2) {
         var data = _ref2.data;
-        return _this2.setSuccessMessage();
+        return _this2.setSuccessMessage(data);
       })["catch"](function (_ref3) {
         var response = _ref3.response;
         return _this2.setErrors(response);
       });
     },
     setErrors: function setErrors(response) {
-      this.errors = response.data.errors;
+      console.log('ERROR RESPONSE', response);
+      this.errors = response.data.error;
     },
-    setSuccessMessage: function setSuccessMessage() {
-      // this.reset();
+    setSuccessMessage: function setSuccessMessage(data) {
+      console.log('response data', data);
+      this.errors = {};
       this.saved = true;
+      alert('User Info updated.');
+      window.location.href = '/user-list';
     }
   }
 });
@@ -37406,7 +37684,18 @@ var render = function() {
                     [_c("i", { staticClass: "fa fa-pencil" })]
                   ),
                   _vm._v("\n\t\t\t\t\t\t\t \n\t\t\t\t\t\t\t"),
-                  _vm._m(2, true)
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeItem(user.id)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fa fa-trash" })]
+                  )
                 ])
               ])
             }),
@@ -37424,9 +37713,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", [
       _vm._v("User Management\n\t\t\t\t"),
-      _c("button", { staticClass: "btn btn-success btn-sm pull-right" }, [
-        _c("i", { staticClass: "fa fa-plus" })
-      ])
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success btn-sm pull-right",
+          attrs: { href: "/user/create" }
+        },
+        [_c("i", { staticClass: "fa fa-plus" })]
+      )
     ])
   },
   function() {
@@ -37434,14 +37728,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("th", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-danger btn-sm" }, [
-      _c("i", { staticClass: "fa fa-trash" })
-    ])
   }
 ]
 render._withStripped = true
@@ -37622,6 +37908,556 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UserFormCreate.vue?vue&type=template&id=043caab6&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UserFormCreate.vue?vue&type=template&id=043caab6& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "well well-sm", attrs: { id: "user-edit-form" } },
+    [
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          attrs: { method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.onSubmit($event)
+            }
+          }
+        },
+        [
+          _c("fieldset", [
+            _c("legend", { staticClass: "text-center" }, [
+              _vm._v("Create User")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "username" }
+                },
+                [_vm._v("Username")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.username }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.username,
+                        expression: "userData.username"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "username",
+                      type: "text",
+                      placeholder: "Username"
+                    },
+                    domProps: { value: _vm.userData.username },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "username", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.username
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.username[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "email" }
+                },
+                [_vm._v("Email")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.email }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.email,
+                        expression: "userData.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "email", type: "text", placeholder: "Email" },
+                    domProps: { value: _vm.userData.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "email", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.email
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.email[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "password" }
+                },
+                [_vm._v("Password")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors["password"] }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.password,
+                        expression: "userData.password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "password",
+                      type: "password",
+                      placeholder: "Password"
+                    },
+                    domProps: { value: _vm.userData.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "password", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors["password"]
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.password[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "confirm_password" }
+                },
+                [_vm._v("Confirm Password")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.confirm_password }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.confirm_password,
+                        expression: "userData.confirm_password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "confirm_password",
+                      type: "password",
+                      placeholder: "Confirm Password"
+                    },
+                    domProps: { value: _vm.userData.confirm_password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.userData,
+                          "confirm_password",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.confirm_password
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.confirm_password[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "firstname" }
+                },
+                [_vm._v("Firstname")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.firstname }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.firstname,
+                        expression: "userData.firstname"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "firstname",
+                      type: "text",
+                      placeholder: "Firstname"
+                    },
+                    domProps: { value: _vm.userData.firstname },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "firstname", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.firstname
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.firstname[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "lastname" }
+                },
+                [_vm._v("Lastname")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.lastname }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.lastname,
+                        expression: "userData.lastname"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "lastname",
+                      type: "text",
+                      placeholder: "Lastname"
+                    },
+                    domProps: { value: _vm.userData.lastname },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "lastname", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.lastname
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.lastname[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "address" }
+                },
+                [_vm._v("Address")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.address }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.address,
+                        expression: "userData.address"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "address",
+                      type: "text",
+                      placeholder: "Address"
+                    },
+                    domProps: { value: _vm.userData.address },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "address", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.address
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.address[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "postcode" }
+                },
+                [_vm._v("Post Code")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.postcode }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.postcode,
+                        expression: "userData.postcode"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "postcode",
+                      type: "text",
+                      placeholder: "Post Code"
+                    },
+                    domProps: { value: _vm.userData.postcode },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "postcode", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.postcode
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.postcode[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "phone_number" }
+                },
+                [_vm._v("Phone Number")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.phone_number }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.phone_number,
+                        expression: "userData.phone_number"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "phone_number",
+                      type: "text",
+                      placeholder: "Phone Number"
+                    },
+                    domProps: { value: _vm.userData.phone_number },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.userData,
+                          "phone_number",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.phone_number
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.phone_number[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-secondary btn-lg pull-left",
+            attrs: { href: "/user-list" }
+          },
+          [_vm._v("Back")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-lg pull-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Submit")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UserFormEdit.vue?vue&type=template&id=29cc2144&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UserFormEdit.vue?vue&type=template&id=29cc2144& ***!
@@ -37639,7 +38475,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "well well-sm", attrs: { id: "signature-form" } },
+    { staticClass: "well well-sm", attrs: { id: "user-edit-form" } },
     [
       _c(
         "form",
@@ -37664,16 +38500,16 @@ var render = function() {
                 "label",
                 {
                   staticClass: "col-md-3 control-label",
-                  attrs: { for: "name" }
+                  attrs: { for: "username" }
                 },
-                [_vm._v("Name")]
+                [_vm._v("Username")]
               ),
               _vm._v(" "),
               _c(
                 "div",
                 {
                   staticClass: "col-md-12",
-                  class: { "has-error": _vm.errors.name }
+                  class: { "has-error": _vm.errors.username }
                 },
                 [
                   _c("input", {
@@ -37687,9 +38523,9 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      id: "name",
+                      id: "username",
                       type: "text",
-                      placeholder: "Your name"
+                      placeholder: "Username"
                     },
                     domProps: { value: _vm.userData.username },
                     on: {
@@ -37702,9 +38538,429 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm.errors.name
+                  _vm.errors.username
                     ? _c("span", { staticClass: "help-block text-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.name[0]))
+                        _vm._v(_vm._s(_vm.errors.username[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "email" }
+                },
+                [_vm._v("Email")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.email }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.email,
+                        expression: "userData.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "email", type: "text", placeholder: "Email" },
+                    domProps: { value: _vm.userData.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "email", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.email
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.email[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "password" }
+                },
+                [_vm._v("Password")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors["password"] }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.password,
+                        expression: "userData.password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "password",
+                      type: "password",
+                      placeholder: "Password"
+                    },
+                    domProps: { value: _vm.userData.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "password", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors["password"]
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.password[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "confirm_password" }
+                },
+                [_vm._v("Confirm Password")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.password }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.confirm_password,
+                        expression: "userData.confirm_password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "confirm_password",
+                      type: "password",
+                      placeholder: "Confirm Password"
+                    },
+                    domProps: { value: _vm.userData.confirm_password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.userData,
+                          "confirm_password",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.password
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.password[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "firstname" }
+                },
+                [_vm._v("Firstname")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.firstname }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.firstname,
+                        expression: "userData.firstname"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "firstname",
+                      type: "text",
+                      placeholder: "Firstname"
+                    },
+                    domProps: { value: _vm.userData.firstname },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "firstname", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.firstname
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.firstname[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "lastname" }
+                },
+                [_vm._v("Lastname")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.lastname }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.lastname,
+                        expression: "userData.lastname"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "lastname",
+                      type: "text",
+                      placeholder: "Lastname"
+                    },
+                    domProps: { value: _vm.userData.lastname },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "lastname", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.lastname
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.lastname[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "address" }
+                },
+                [_vm._v("Address")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.address }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.address,
+                        expression: "userData.address"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "address",
+                      type: "text",
+                      placeholder: "Address"
+                    },
+                    domProps: { value: _vm.userData.address },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "address", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.address
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.address[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "postcode" }
+                },
+                [_vm._v("Post Code")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.postcode }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.postcode,
+                        expression: "userData.postcode"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "postcode",
+                      type: "text",
+                      placeholder: "Post Code"
+                    },
+                    domProps: { value: _vm.userData.postcode },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.userData, "postcode", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.postcode
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.postcode[0]))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-3 control-label",
+                  attrs: { for: "phone_number" }
+                },
+                [_vm._v("Phone Number")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-12",
+                  class: { "has-error": _vm.errors.phone_number }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.userData.phone_number,
+                        expression: "userData.phone_number"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "phone_number",
+                      type: "text",
+                      placeholder: "Phone Number"
+                    },
+                    domProps: { value: _vm.userData.phone_number },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.userData,
+                          "phone_number",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.phone_number
+                    ? _c("span", { staticClass: "help-block text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.phone_number[0]))
                       ])
                     : _vm._e()
                 ]
@@ -37724,10 +38980,22 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-12 text-right" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-secondary btn-lg pull-left",
+            attrs: { href: "/user-list" }
+          },
+          [_vm._v("Back")]
+        ),
+        _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary btn-lg", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary btn-lg pull-right",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Submit")]
         )
       ])
@@ -52851,6 +54119,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/UserFormCreate.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/UserFormCreate.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserFormCreate_vue_vue_type_template_id_043caab6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserFormCreate.vue?vue&type=template&id=043caab6& */ "./resources/js/components/UserFormCreate.vue?vue&type=template&id=043caab6&");
+/* harmony import */ var _UserFormCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserFormCreate.vue?vue&type=script&lang=js& */ "./resources/js/components/UserFormCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserFormCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserFormCreate_vue_vue_type_template_id_043caab6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserFormCreate_vue_vue_type_template_id_043caab6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/UserFormCreate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/UserFormCreate.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/UserFormCreate.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserFormCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./UserFormCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UserFormCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserFormCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/UserFormCreate.vue?vue&type=template&id=043caab6&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/UserFormCreate.vue?vue&type=template&id=043caab6& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserFormCreate_vue_vue_type_template_id_043caab6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./UserFormCreate.vue?vue&type=template&id=043caab6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UserFormCreate.vue?vue&type=template&id=043caab6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserFormCreate_vue_vue_type_template_id_043caab6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserFormCreate_vue_vue_type_template_id_043caab6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/UserFormEdit.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/UserFormEdit.vue ***!
@@ -52933,9 +54270,9 @@ __webpack_require__.r(__webpack_exports__);
   login_post: '/api/login',
   user_list: '/api/users?page=',
   user_data: '/api/users',
-  user_create: 'api/users',
-  user_update: 'api/users/:id',
-  user_delete: 'api/users/:id',
+  user_create: '/api/users',
+  user_update: '/api/users',
+  user_delete: 'api/users',
   user_delete_multiple: 'api/users/remove?ids='
 });
 
@@ -52987,8 +54324,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/NotFound */ "./resources/js/components/NotFound.vue");
 /* harmony import */ var _components_List__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/List */ "./resources/js/components/List.vue");
-/* harmony import */ var _components_UserFormEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UserFormEdit */ "./resources/js/components/UserFormEdit.vue");
-/* harmony import */ var _components_LoginForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/LoginForm */ "./resources/js/components/LoginForm.vue");
+/* harmony import */ var _components_UserFormCreate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UserFormCreate */ "./resources/js/components/UserFormCreate.vue");
+/* harmony import */ var _components_UserFormEdit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/UserFormEdit */ "./resources/js/components/UserFormEdit.vue");
+/* harmony import */ var _components_LoginForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/LoginForm */ "./resources/js/components/LoginForm.vue");
+
 
 
 
@@ -52997,15 +54336,19 @@ __webpack_require__.r(__webpack_exports__);
   mode: 'history',
   routes: [{
     path: "/login",
-    component: _components_LoginForm__WEBPACK_IMPORTED_MODULE_3__["default"],
+    component: _components_LoginForm__WEBPACK_IMPORTED_MODULE_4__["default"],
     name: 'loginform'
   }, {
     path: "/user-list",
     component: _components_List__WEBPACK_IMPORTED_MODULE_1__["default"],
     name: 'list'
   }, {
+    path: "/user/create",
+    component: _components_UserFormCreate__WEBPACK_IMPORTED_MODULE_2__["default"],
+    name: 'createform'
+  }, {
     path: "/user/edit/:user_id",
-    component: _components_UserFormEdit__WEBPACK_IMPORTED_MODULE_2__["default"],
+    component: _components_UserFormEdit__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: 'editform'
   }]
 });

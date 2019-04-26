@@ -23,8 +23,8 @@ class UserResource extends JsonResource
             'lastname' => $this->info->lastname,
             'fullname' => $this->fullname,
             'address' => $this->info->address,
-            'post_code' => $this->info->postcode,
-            'phone' => $this->info->phone_number,
+            'postcode' => $this->info->postcode,
+            'phone_number' => $this->info->phone_number,
         ];
     }
 }

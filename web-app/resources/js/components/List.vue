@@ -3,9 +3,9 @@
 		<div class="row">
 			<div class="col-sm">
 				<h3>User Management
-					<button class="btn btn-success btn-sm pull-right">
+					<a class="btn btn-success btn-sm pull-right" href="/user/create">
 						<i class="fa fa-plus"></i>
-					</button>
+					</a>
 				</h3>
 				<table class="table">
 					<thead>
@@ -30,7 +30,7 @@
 									<i class="fa fa-pencil"></i>
 								</a>
 								&nbsp;
-								<button class="btn btn-danger btn-sm">
+								<button class="btn btn-danger btn-sm" v-on:click="removeItem(user.id)">
 									<i class="fa fa-trash"></i>
 								</button>
 							</td>
@@ -56,7 +56,8 @@ export default {
 			lang: lang,
 			userData: [],
 			pagecount: 1,
-			apiUrl: endpoints.user_list
+			apiUrl: endpoints.user_list,
+			apiUrlDelete: endpoints.user_delete
 		}
 	},
 	created() {
@@ -76,6 +77,19 @@ export default {
 				this.userData = data.data;
 				this.pageCount = data.meta.last_page;
 			});
+		},
+		removeItem(userId) {
+			if (confirm("Delete item?")) {
+				axios({
+					method: 'delete',
+					url: `${this.apiUrlDelete}/${userId}`,
+					headers: {'Token': getToken()} 
+				})
+				.then(({data}) => {
+					this.getListData();
+				});				
+			}
+			console.log('userId', userId);
 		}
 	}
 }

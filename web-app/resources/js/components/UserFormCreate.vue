@@ -2,7 +2,7 @@
 	<div class="well well-sm" id="user-edit-form">
 		<form class="form-horizontal" method="post" @submit.prevent="onSubmit">
 			<fieldset>
-				<legend class="text-center">Edit User info</legend>
+				<legend class="text-center">Create User</legend>
 
 				<div class="form-group">
 					<label class="col-md-3 control-label" for="username">Username</label>
@@ -31,9 +31,9 @@
 
 				<div class="form-group">
 					<label class="col-md-3 control-label" for="confirm_password">Confirm Password</label>
-					<div class="col-md-12" :class="{'has-error': errors.password}">
+					<div class="col-md-12" :class="{'has-error': errors.confirm_password}">
 						<input id="confirm_password" v-model="userData.confirm_password" type="password" placeholder="Confirm Password" class="form-control">
-						<span v-if="errors.password" class="help-block text-danger">{{ errors.password[0] }}</span>
+						<span v-if="errors.confirm_password" class="help-block text-danger">{{ errors.confirm_password[0] }}</span>
 					</div>
 				</div>
 
@@ -103,8 +103,7 @@ export default {
 			errors: {},
 			saved: false,
 			userData: {},
-			apiUrlGet: endpoints.user_data,
-			apiUrlPut: endpoints.user_update,
+			apiUrlPost: endpoints.user_create,
 			userId: null
 		};
 	},
@@ -112,25 +111,25 @@ export default {
 		if (!getToken()) {
 			window.location.href = '/login';
 		}
-		this.getUserData(this.$route.params.user_id);
+		// this.getUserData(this.$route.params.user_id);
 	},
 	methods: {
-		getUserData(userId) {
-			this.userId = userId;
-			axios({
-				method: 'get',
-				url: `${this.apiUrlGet}/${this.userId}`,
-				headers: {'Token': getToken()} 
-			})
-			.then(({data}) => {
-				this.userData = data.data;
-			});
-		},
+		// getUserData(userId) {
+		// 	this.userId = userId;
+		// 	axios({
+		// 		method: 'get',
+		// 		url: `${this.apiUrlGet}/${this.userId}`,
+		// 		headers: {'Token': getToken()} 
+		// 	})
+		// 	.then(({data}) => {
+		// 		this.userData = data.data;
+		// 	});
+		// },
 		onSubmit() {
 			this.saved = false;
 			axios({
-				method: 'put',
-				url: `${this.apiUrlPut}/${this.userId}`,
+				method: 'post',
+				url: this.apiUrlPost,
 				headers: {'Token': getToken()},
 				data: this.userData
 			})
@@ -148,7 +147,7 @@ export default {
 			console.log('response data', data);
 			this.errors = {};
 			this.saved = true;
-			alert('User Info updated.');
+			alert('User added.');
 			window.location.href = '/user-list';
 		},
 	}
