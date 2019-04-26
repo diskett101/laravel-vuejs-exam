@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/{any}', function () {
-    return view('spa');
-})->where('any', '.*');
+// Route::group(['prefix' => '/web'], function() {
+	Route::get('/user-list', function () {
+	    return view('admin');
+	});
+	Route::get('/user/{any}', function () {
+	    return view('admin');
+	})->where('any', '.*');
+// });
+

@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use \Hash;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -80,4 +82,8 @@ class User extends Authenticatable
         return self::$user_types[$this->user_type];
     }
 
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }
