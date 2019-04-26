@@ -12,10 +12,10 @@ class DefaultUserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        DB::table('users')->insert([
 			'username' => 'admin',
 			'email' => 'melvin.empleo.test@gmail.com',
-            'password' => \Hash::make('admin#1234'),
+            'password' => \Hash::make("admin123"),
             'user_type' => User::$user_types['admin']['code']
 		]);
     }

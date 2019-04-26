@@ -1,5 +1,14 @@
 version: '2'
 services:
+  # REDIS
+  laravel_vuejs_exam_redis:
+    container_name: laravel_vuejs_exam_redis
+    image: redis:5.0
+    ports:
+      - 6380:6379
+    expose:
+      - 6380
+
   # MYSQL
   laravel_vuejs_exam_mysql:
     container_name: laravel_vuejs_exam_mysql

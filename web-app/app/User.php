@@ -82,8 +82,13 @@ class User extends Authenticatable
         return self::$user_types[$this->user_type];
     }
 
-    public function setPasswordAttribute($value)
+    public function setPasswordAttribute($password_value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        $this->attributes['password'] = Hash::make($password_value);
+    }
+
+    public function removeInfo()
+    {
+        $this->info()->delete();
     }
 }

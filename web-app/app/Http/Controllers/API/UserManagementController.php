@@ -13,20 +13,6 @@ use App\Http\Resources\UserResource;
 
 class UserManagementController extends Controller
 {
-    public $request_rule = [
-        'post' => [
-            'username' => 'required|min:8|max:50|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|max:50',
-            'firstname' => 'required|min:3|max:50',
-            'lastname' => 'required|min:3|max:50',
-            'address' => 'required|min:5|max:255',
-            'postcode' => 'required|min:4|max:5',
-            'phone_number' => 'required|min:7|max:10',
-        ],
-        'put' => [],
-    ];
-
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +45,17 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-        $request_validation = Validator::make($request->all(), $this->request_rule['post']);
+        $post_rules = [
+            'username' => 'required|min:4|max:50|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|max:50',
+            'firstname' => 'required|min:3|max:50',
+            'lastname' => 'required|min:3|max:50',
+            'address' => 'required|min:5|max:255',
+            'postcode' => 'required|min:4|max:5',
+            'phone_number' => 'required|min:7|max:10',
+        ];
+        $request_validation = Validator::make($request->all(), $post_rules);
         if ($request_validation->fails()) {
             return Response::json([
                 'error' => $request_validation->errors()
@@ -115,7 +111,36 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update_rules = [
+            'username' => ('required|min:8|max:50|unique:users,id,' . $id),
+            'email' => ('required|email|unique:users,id,' . $id),
+            'password' => 'required|min:8|max:50',
+            'firstname' => 'required|min:3|max:50',
+            'lastname' => 'required|min:3|max:50',
+            'address' => 'required|min:5|max:255',
+            'postcode' => 'required|min:4|max:5',
+            'phone_number' => 'required|min:7|max:10',
+        ];
+        $request_validation = Validator::make($request->all(), $update_rules);
+        if ($request_validation->fails()) {
+            return Response::json([
+                'error' => $request_validation->errors()
+            ], 400);
+        }
+        $request_data = $request->all();
+        $user = User::find($id);
+        $user->username = $request_data['username'];
+        $user->email = $request_data['email'];
+        $user->password = $request_data['password'];
+        $user->info->update([
+            'firstname' => $request_data['firstname'],
+            'lastname' => $request_data['lastname'],
+            'address' => $request_data['address'],
+            'postcode' => $request_data['postcode'],
+            'phone_number' => $request_data['phone_number'],
+        ]);
+        $user->save();
+        return new UserResource($user);
     }
 
     /**
@@ -124,8 +149,15 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::find($id);
+        $user->removeInfo();
         $user->delete();
-    }
+   }
+
+   public function removeAll(Request $request)
+   {
+        return $request;
+   }
 }
