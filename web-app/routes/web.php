@@ -11,15 +11,16 @@
 |
 */
 
-// Route::group(['prefix' => '/web'], function() {
-	Route::get('/user-list', function () {
-	    return view('admin');
-	});
-	Route::get('/user/{any}', function () {
-	    return view('admin');
-	})->where('any', '.*');
-	Route::get('/login', function () {
-	    return view('admin');
-	})->where('any', '.*');
-// });
+Route::get('/', function (){
+	return redirect('/user-list');
+});
+Route::get('/user-list', function () {
+    return view('admin');
+});
+Route::get('/user/{any}', function () {
+    return view('admin');
+})->where('any', '.*');
+Route::get('/login', function () {
+    return view('admin');
+})->where('any', '.*');
 

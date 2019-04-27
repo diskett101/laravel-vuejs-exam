@@ -1,16 +1,19 @@
 <template>
 	<div class="container">
+		<button class="btn btn-dark btn-sm pull-right" v-on:click="logout()">Logout</button>
 		<div class="row">
-			<div class="col-sm">
+			<div class="col-sm page-content">
 				<h3>User Management
 					<a class="btn btn-success btn-sm pull-right" href="/user/create">
-						<i class="fa fa-plus"></i>
+						Add
 					</a>
 				</h3>
 				<table class="table">
 					<thead>
 						<tr>
-							<th> <input type="checkbox"> </th>
+							<th>
+								<input type="checkbox" v-on:click="toggleSelectAll($event)">
+							</th>
 							<th>{{ lang.id }}</th>
 							<th>{{ lang.username }}</th>
 							<th>{{ lang.email }}</th>
@@ -20,7 +23,9 @@
 					</thead>
 					<tbody>
 						<tr v-for="user in userData">
-							<td><input type="checkbox" :value="user.id"></td>
+							<td>
+								<input type="checkbox" :value="user.id" v-on:click="modifyListToDelete(user.id, $event)" :checked="allSelected">
+							</td>
 							<td>{{ user.id }}</td>
 							<td>{{ user.username }}</td>
 							<td>{{ user.email }}</td>
@@ -37,6 +42,9 @@
 						</tr>
 					</tbody>
 				</table>
+				<button class="btn btn-danger btn-sm" v-on:click="removeItems()" :disabled="!hasItemsToDelete">
+					Remove Selected
+				</button>
 			</div>
 		</div>
 	</div>
@@ -45,11 +53,11 @@
 <script>
 import endpoints from '../endpoints';
 import lang from '../lang';
-import {getToken} from '../functions';
+import {getToken, removeToken} from '../functions';
 
 export default {
 	mounted() {
-		console.log('MAIN page');
+		console.log('List component mounted');
 	},
 	data() {
 		return {
@@ -57,25 +65,32 @@ export default {
 			userData: [],
 			pagecount: 1,
 			apiUrl: endpoints.user_list,
-			apiUrlDelete: endpoints.user_delete
+			apiUrlDelete: endpoints.user_delete,
+			apiUrlDeleteMultiple: endpoints.user_delete_multiple,
+			apiUrlLogout: endpoints.logout_post,
+			idsToDelete: [],
+			allSelected: false,
+			hasItemsToDelete: false
 		}
 	},
 	created() {
+		this.getListData();
+	},
+	beforeCreate() {
 		if (!getToken()) {
 			window.location.href = '/login';
 		}
-		this.getListData();
 	},
 	methods: {
 		getListData(page = 1) {
 			axios({
 				method: 'get',
 				url: `${this.apiUrl}${page}`,
-				headers: {'Token': getToken()} 
+				headers: {'Token': getToken()}
 			})
 			.then(({data}) => {
 				this.userData = data.data;
-				this.pageCount = data.meta.last_page;
+				// this.pageCount = data.meta.last_page;
 			});
 		},
 		removeItem(userId) {
@@ -83,13 +98,57 @@ export default {
 				axios({
 					method: 'delete',
 					url: `${this.apiUrlDelete}/${userId}`,
-					headers: {'Token': getToken()} 
+					headers: {'Token': getToken()}
 				})
 				.then(({data}) => {
 					this.getListData();
-				});				
+				});
 			}
-			console.log('userId', userId);
+		},
+		removeItems(){
+			if (confirm("Delete selected item(s)?")) {
+				let selectedUserIDsToDelete = this.idsToDelete.join(',');
+				axios({
+					method: 'delete',
+					url: `${this.apiUrlDeleteMultiple}${selectedUserIDsToDelete}`,
+					headers: {'Token': getToken()}
+				})
+				.then(({data}) => {
+					this.getListData();
+				});
+			}
+		},
+		modifyListToDelete(userId, event) {
+			if (event.target.checked) {
+				this.idsToDelete.push(userId);
+			} else {
+				this.idsToDelete = this.idsToDelete.filter((item) => {
+					return item !== userId;
+				});
+			}
+			this.hasItemsToDelete = (this.idsToDelete.length > 0);
+		},
+		toggleSelectAll(event) {
+			this.allSelected = event.target.checked;
+			this.idsToDelete = [];
+			if (event.target.checked) {
+				for (let index = 0; index < this.userData.length; index++) {
+					let element = this.userData[index];
+					this.idsToDelete.push(element.id);
+				}
+			}
+			this.hasItemsToDelete = (this.idsToDelete.length > 0);
+		},
+		logout() {
+			axios({
+				method: 'post',
+				url: this.apiUrlLogout,
+				headers: {'Token': getToken()}
+			})
+			.then(({data}) => {
+				removeToken();
+				window.location.href = '/login';
+			});
 		}
 	}
 }

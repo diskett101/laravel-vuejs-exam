@@ -25,5 +25,7 @@ Route::group(['middleware' => 'api_auth_token'], function() {
 		'update',
 		'destroy'
 	]);
+	Route::delete('destroy-all', 'API\UserManagementController@remove_selected');
+	Route::post('logout', 'API\LoginController@logout');
 });
-Route::post('login', 'API\LoginController@post');
+Route::post('login', 'API\LoginController@login');

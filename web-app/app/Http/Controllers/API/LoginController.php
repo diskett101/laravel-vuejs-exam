@@ -15,7 +15,7 @@ use App\User;
 
 class LoginController extends Controller
 {
-	public function post(Request $request)
+	public function login(Request $request)
 	{
 		$rules = [
 			'email' => 'required',
@@ -45,5 +45,11 @@ class LoginController extends Controller
 				'error' => "Invalid Credentials"
 			], 400);
 		}
+	}
+	public function logout(Request $request)
+	{
+		$token_header = $request->header('token');
+		Redis::del($token_header);
+		return Response::json([], 204);
 	}
 }

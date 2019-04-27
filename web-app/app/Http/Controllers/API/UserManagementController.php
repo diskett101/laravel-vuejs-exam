@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Redis;
 use Response;
 use Validator;
 
@@ -200,12 +201,38 @@ class UserManagementController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->removeInfo();
-        $user->delete();
-   }
+        $token_header = $request->header('token');
+        $requesting_user_id = Redis::get($token_header);
+        if ($id != $requesting_user_id) {
+            // IF not requesting user's id
+            if (!empty($user)) {
+                $user->removeInfo();
+                $user->delete();
+            }
+        }
+        return Response::json([], 204);
+    }
 
-   public function removeAll(Request $request)
+   public function remove_selected(Request $request)
    {
-        return $request;
+        if ($request->has('ids')) {
+            $token_header = $request->header('token');
+            $requesting_user_id = Redis::get($token_header);
+            $ids_qs = $request->input('ids');
+            $ids = explode(',', $ids_qs);
+            foreach ($ids as $key => $user_id) {
+                if ($user_id == $requesting_user_id) {
+                    // Skip requesting user's id
+                    continue;
+                }
+                $user = User::find($user_id);
+                if (empty($user)) {
+                    continue;
+                }
+                $user->removeInfo();
+                $user->delete();
+            }
+        }
+        return Response::json([], 204);
    }
 }
