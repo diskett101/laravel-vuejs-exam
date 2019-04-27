@@ -3,5 +3,27 @@ export default {
 	username: "Username",
 	email: "Email",
 	fullname: "Fullname",
-	actions: "Actions"
+	actions: "Actions",
+	add: "Add",
+	remove_selected: "Remove Selected",
+	back: "Back",
+	submit: "Submit",
+	logout: "Logout",
+	login: "Login",
+	email: "Email",
+	password: "Password",
+	confirm_password: "Confirm Password",
+	firstname: "Firstname",
+	lastname: "Lastname",
+	address: "Address",
+	post_code: "Post Code",
+	contact_phone_number: "Contact Phone Number",
+	user_management: "User Management",
+	create_user: "Create User",
+	edit_user_info: "Edit User Info",
+	delete_item: "Delete item?",
+	delete_selected_items: "Delete selected item(s)?",
+	user_info_updated: "User info updated.",
+	user_added: "User added."
+
 }

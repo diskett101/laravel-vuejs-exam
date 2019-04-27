@@ -1,11 +1,11 @@
 <template>
 	<div class="container">
-		<button class="btn btn-dark btn-sm pull-right" v-on:click="logout()">Logout</button>
+		<button class="btn btn-link btn-sm pull-right" v-on:click="logout()">{{ lang.logout }}</button>
 		<div class="row">
 			<div class="col-sm page-content">
-				<h3>User Management
+				<h3>{{ lang.user_management }}
 					<a class="btn btn-success btn-sm pull-right" href="/user/create">
-						Add
+						{{lang.add}}
 					</a>
 				</h3>
 				<table class="table">
@@ -43,7 +43,7 @@
 					</tbody>
 				</table>
 				<button class="btn btn-danger btn-sm" v-on:click="removeItems()" :disabled="!hasItemsToDelete">
-					Remove Selected
+					{{ lang.remove_selected }}
 				</button>
 			</div>
 		</div>

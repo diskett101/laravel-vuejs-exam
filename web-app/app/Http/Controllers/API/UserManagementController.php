@@ -48,7 +48,7 @@ class UserManagementController extends Controller
             'lastname' => 'required|min:3|max:50',
             'address' => 'required|min:10|max:255',
             'postcode' => 'required|min:4|integer',
-            'phone_number' => 'required|min:7|integer',
+            'phone_number' => 'required|min:7',
         ];
         $request_validation = Validator::make($request->all(), $post_rules);
         if ($request_validation->fails()) {
@@ -82,7 +82,7 @@ class UserManagementController extends Controller
             'postcode' => $request_data['postcode'],
             'phone_number' => $request_data['phone_number'],
         ]);
-        return new UserResource($user);
+        return Response::json(new UserResource($user), 200);
     }
 
     /**
@@ -114,7 +114,7 @@ class UserManagementController extends Controller
             'lastname' => 'min:3|max:50',
             'address' => 'min:10|max:255',
             'postcode' => 'min:4|integer',
-            'phone_number' => 'min:7|integer',
+            'phone_number' => 'min:7',
         ];
         $request_validation = Validator::make($request->all(), $update_rules);
         if ($request_validation->fails()) {
@@ -169,7 +169,7 @@ class UserManagementController extends Controller
             $user->info->update($info_data);
         }
         $user->save();
-        return new UserResource($user);
+        return Response::json(new UserResource($user), 200);
     }
 
     /**

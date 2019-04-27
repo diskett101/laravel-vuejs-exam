@@ -31,6 +31,11 @@ class LoginController extends Controller
 		$password = $request->get('password');
 		if (Auth::attempt(['email' => $email, 'password' => $password])) {
 			$user = $request->user();
+			if ($user->user_type != User::$user_types['admin']['code']) {
+				return Response::json([
+					'error' => "Unauthorized"
+				], 401);
+			}
 			$token = "token_" . base64_encode(uniqid());
 			Token::create([
 				'user_id' => $user->id,

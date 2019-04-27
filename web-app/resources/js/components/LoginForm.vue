@@ -5,27 +5,27 @@
 			<div class="col-md-6 page-content">
 				<form class="form-horizontal" method="post" @submit.prevent="onSubmit">
 					<fieldset>
-						<legend class="text-center">Login</legend>
+						<legend class="text-center">{{ lang.login }}</legend>
 
 						<div class="form-group">
-							<label class="col-md-3 control-label" for="email">Email</label>
+							<label class="col-md-3 control-label" for="email">{{ lang.email }}</label>
 							<div class="col-md-12">
-								<input id="email" v-model="email" type="email" placeholder="Email" class="form-control">
+								<input id="email" v-model="email" type="email" :placeholder="lang.email" class="form-control">
 
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-3 control-label" for="password">Password</label>
+							<label class="col-md-3 control-label" for="password">{{lang.password}}</label>
 							<div class="col-md-12" :class="{'has-error': error}">
-								<input id="password" v-model="password" type="password" placeholder="Password" class="form-control">
+								<input id="password" v-model="password" type="password" :placeholder="lang.password" class="form-control">
 								<span v-if="error" class="help-block text-danger">{{ error }}</span>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-md-12 text-right">
-							<button type="submit" class="btn btn-primary btn-sm">Login</button>
+							<button type="submit" class="btn btn-primary btn-sm">{{ lang.login }}</button>
 						</div>
 						</div>
 					</fieldset>

@@ -2341,9 +2341,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('this.$route.params', this.$route.params);
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       lang: _lang__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2404,7 +2402,7 @@ __webpack_require__.r(__webpack_exports__);
     setSuccessMessage: function setSuccessMessage(data) {
       this.errors = {};
       this.saved = true;
-      alert('User Info updated.');
+      alert('User info updated.');
       window.location.href = '/user-list';
     }
   }
@@ -37705,19 +37703,29 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-dark btn-sm pull-right",
+        staticClass: "btn btn-link btn-sm pull-right",
         on: {
           click: function($event) {
             return _vm.logout()
           }
         }
       },
-      [_vm._v("Logout")]
+      [_vm._v(_vm._s(_vm.lang.logout))]
     ),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-sm page-content" }, [
-        _vm._m(0),
+        _c("h3", [
+          _vm._v(_vm._s(_vm.lang.user_management) + "\n\t\t\t\t"),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success btn-sm pull-right",
+              attrs: { href: "/user/create" }
+            },
+            [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.lang.add) + "\n\t\t\t\t")]
+          )
+        ]),
         _vm._v(" "),
         _c("table", { staticClass: "table" }, [
           _c("thead", [
@@ -37809,30 +37817,13 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n\t\t\t\tRemove Selected\n\t\t\t")]
+          [_vm._v("\n\t\t\t\t" + _vm._s(_vm.lang.remove_selected) + "\n\t\t\t")]
         )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", [
-      _vm._v("User Management\n\t\t\t\t"),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success btn-sm pull-right",
-          attrs: { href: "/user/create" }
-        },
-        [_vm._v("\n\t\t\t\t\tAdd\n\t\t\t\t")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -37873,7 +37864,9 @@ var render = function() {
           },
           [
             _c("fieldset", [
-              _c("legend", { staticClass: "text-center" }, [_vm._v("Login")]),
+              _c("legend", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(_vm.lang.login))
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c(
@@ -37882,7 +37875,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "email" }
                   },
-                  [_vm._v("Email")]
+                  [_vm._v(_vm._s(_vm.lang.email))]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-12" }, [
@@ -37896,7 +37889,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { id: "email", type: "email", placeholder: "Email" },
+                    attrs: {
+                      id: "email",
+                      type: "email",
+                      placeholder: _vm.lang.email
+                    },
                     domProps: { value: _vm.email },
                     on: {
                       input: function($event) {
@@ -37917,7 +37914,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "password" }
                   },
-                  [_vm._v("Password")]
+                  [_vm._v(_vm._s(_vm.lang.password))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -37940,7 +37937,7 @@ var render = function() {
                       attrs: {
                         id: "password",
                         type: "password",
-                        placeholder: "Password"
+                        placeholder: _vm.lang.password
                       },
                       domProps: { value: _vm.password },
                       on: {
@@ -37962,7 +37959,18 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "col-md-12 text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-sm",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v(_vm._s(_vm.lang.login))]
+                  )
+                ])
+              ])
             ])
           ]
         )
@@ -37972,22 +37980,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-12 text-right" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
-          [_vm._v("Login")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38033,7 +38026,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container  page-content" }, [
     _c(
       "div",
       { staticClass: "well well-sm", attrs: { id: "user-edit-form" } },
@@ -38053,7 +38046,7 @@ var render = function() {
           [
             _c("fieldset", [
               _c("legend", { staticClass: "text-center" }, [
-                _vm._v("Create User")
+                _vm._v(_vm._s(_vm.lang.create_user))
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -38119,7 +38112,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "email" }
                   },
-                  [_vm._v("Email")]
+                  [_vm._v(_vm._s(_vm.lang.email))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38142,7 +38135,7 @@ var render = function() {
                       attrs: {
                         id: "email",
                         type: "text",
-                        placeholder: "Email"
+                        placeholder: _vm.lang.email
                       },
                       domProps: { value: _vm.userData.email },
                       on: {
@@ -38171,7 +38164,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "password" }
                   },
-                  [_vm._v("Password")]
+                  [_vm._v(_vm._s(_vm.lang.password))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38194,7 +38187,7 @@ var render = function() {
                       attrs: {
                         id: "password",
                         type: "password",
-                        placeholder: "Password"
+                        placeholder: _vm.lang.password
                       },
                       domProps: { value: _vm.userData.password },
                       on: {
@@ -38227,7 +38220,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "confirm_password" }
                   },
-                  [_vm._v("Confirm Password")]
+                  [_vm._v(_vm._s(_vm.lang.confirm_password))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38250,7 +38243,7 @@ var render = function() {
                       attrs: {
                         id: "confirm_password",
                         type: "password",
-                        placeholder: "Confirm Password"
+                        placeholder: _vm.lang.confirm_password
                       },
                       domProps: { value: _vm.userData.confirm_password },
                       on: {
@@ -38283,7 +38276,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "firstname" }
                   },
-                  [_vm._v("Firstname")]
+                  [_vm._v(_vm._s(_vm.lang.firstname))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38306,7 +38299,7 @@ var render = function() {
                       attrs: {
                         id: "firstname",
                         type: "text",
-                        placeholder: "Firstname"
+                        placeholder: _vm.lang.firstname
                       },
                       domProps: { value: _vm.userData.firstname },
                       on: {
@@ -38339,7 +38332,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "lastname" }
                   },
-                  [_vm._v("Lastname")]
+                  [_vm._v(_vm._s(_vm.lang.lastname))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38362,7 +38355,7 @@ var render = function() {
                       attrs: {
                         id: "lastname",
                         type: "text",
-                        placeholder: "Lastname"
+                        placeholder: _vm.lang.lastname
                       },
                       domProps: { value: _vm.userData.lastname },
                       on: {
@@ -38395,7 +38388,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "address" }
                   },
-                  [_vm._v("Address")]
+                  [_vm._v(_vm._s(_vm.lang.address))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38418,7 +38411,7 @@ var render = function() {
                       attrs: {
                         id: "address",
                         type: "text",
-                        placeholder: "Address"
+                        placeholder: _vm.lang.address
                       },
                       domProps: { value: _vm.userData.address },
                       on: {
@@ -38447,7 +38440,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "postcode" }
                   },
-                  [_vm._v("Post Code")]
+                  [_vm._v(_vm._s(_vm.lang.post_code))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38470,7 +38463,7 @@ var render = function() {
                       attrs: {
                         id: "postcode",
                         type: "text",
-                        placeholder: "Post Code"
+                        placeholder: _vm.lang.post_code
                       },
                       domProps: { value: _vm.userData.postcode },
                       on: {
@@ -38503,7 +38496,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "phone_number" }
                   },
-                  [_vm._v("Phone Number")]
+                  [_vm._v(_vm._s(_vm.lang.contact_phone_number))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38526,7 +38519,7 @@ var render = function() {
                       attrs: {
                         id: "phone_number",
                         type: "text",
-                        placeholder: "Phone Number"
+                        placeholder: _vm.lang.contact_phone_number
                       },
                       domProps: { value: _vm.userData.phone_number },
                       on: {
@@ -38552,7 +38545,27 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-secondary btn-sm pull-left",
+                      attrs: { href: "/user-list" }
+                    },
+                    [_vm._v(_vm._s(_vm.lang.back))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-sm pull-right",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v(_vm._s(_vm.lang.submit))]
+                  )
+                ])
+              ])
             ])
           ]
         )
@@ -38560,34 +38573,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-secondary btn-sm pull-left",
-            attrs: { href: "/user-list" }
-          },
-          [_vm._v("Back")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm pull-right",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Submit")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38609,7 +38595,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container page-content" }, [
     _c(
       "div",
       { staticClass: "well well-sm", attrs: { id: "user-edit-form" } },
@@ -38629,7 +38615,7 @@ var render = function() {
           [
             _c("fieldset", [
               _c("legend", { staticClass: "text-center" }, [
-                _vm._v("Edit User info")
+                _vm._v(_vm._s(_vm.lang.edit_user_info))
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -38639,7 +38625,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "username" }
                   },
-                  [_vm._v("Username")]
+                  [_vm._v(_vm._s(_vm.lang.username))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38662,7 +38648,7 @@ var render = function() {
                       attrs: {
                         id: "username",
                         type: "text",
-                        placeholder: "Username"
+                        placeholder: _vm.lang.username
                       },
                       domProps: { value: _vm.userData.username },
                       on: {
@@ -38695,7 +38681,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "email" }
                   },
-                  [_vm._v("Email")]
+                  [_vm._v(_vm._s(_vm.lang.email))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38718,7 +38704,7 @@ var render = function() {
                       attrs: {
                         id: "email",
                         type: "text",
-                        placeholder: "Email"
+                        placeholder: _vm.lang.email
                       },
                       domProps: { value: _vm.userData.email },
                       on: {
@@ -38747,7 +38733,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "password" }
                   },
-                  [_vm._v("Password")]
+                  [_vm._v(_vm._s(_vm.lang.password))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38770,7 +38756,7 @@ var render = function() {
                       attrs: {
                         id: "password",
                         type: "password",
-                        placeholder: "Password"
+                        placeholder: _vm.lang.password
                       },
                       domProps: { value: _vm.userData.password },
                       on: {
@@ -38803,7 +38789,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "confirm_password" }
                   },
-                  [_vm._v("Confirm Password")]
+                  [_vm._v(_vm._s(_vm.lang.confirm_password))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38826,7 +38812,7 @@ var render = function() {
                       attrs: {
                         id: "confirm_password",
                         type: "password",
-                        placeholder: "Confirm Password"
+                        placeholder: _vm.lang.confirm_password
                       },
                       domProps: { value: _vm.userData.confirm_password },
                       on: {
@@ -38859,7 +38845,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "firstname" }
                   },
-                  [_vm._v("Firstname")]
+                  [_vm._v(_vm._s(_vm.lang.firstname))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38882,7 +38868,7 @@ var render = function() {
                       attrs: {
                         id: "firstname",
                         type: "text",
-                        placeholder: "Firstname"
+                        placeholder: _vm.lang.firstname
                       },
                       domProps: { value: _vm.userData.firstname },
                       on: {
@@ -38915,7 +38901,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "lastname" }
                   },
-                  [_vm._v("Lastname")]
+                  [_vm._v(_vm._s(_vm.lang.lastname))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38938,7 +38924,7 @@ var render = function() {
                       attrs: {
                         id: "lastname",
                         type: "text",
-                        placeholder: "Lastname"
+                        placeholder: _vm.lang.lastname
                       },
                       domProps: { value: _vm.userData.lastname },
                       on: {
@@ -38971,7 +38957,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "address" }
                   },
-                  [_vm._v("Address")]
+                  [_vm._v(_vm._s(_vm.lang.address))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -38994,7 +38980,7 @@ var render = function() {
                       attrs: {
                         id: "address",
                         type: "text",
-                        placeholder: "Address"
+                        placeholder: _vm.lang.address
                       },
                       domProps: { value: _vm.userData.address },
                       on: {
@@ -39023,7 +39009,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "postcode" }
                   },
-                  [_vm._v("Post Code")]
+                  [_vm._v(_vm._s(_vm.lang.post_code))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -39046,7 +39032,7 @@ var render = function() {
                       attrs: {
                         id: "postcode",
                         type: "text",
-                        placeholder: "Post Code"
+                        placeholder: _vm.lang.post_code
                       },
                       domProps: { value: _vm.userData.postcode },
                       on: {
@@ -39079,7 +39065,7 @@ var render = function() {
                     staticClass: "col-md-3 control-label",
                     attrs: { for: "phone_number" }
                   },
-                  [_vm._v("Phone Number")]
+                  [_vm._v(_vm._s(_vm.lang.contact_phone_number))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -39102,7 +39088,7 @@ var render = function() {
                       attrs: {
                         id: "phone_number",
                         type: "text",
-                        placeholder: "Phone Number"
+                        placeholder: _vm.lang.contact_phone_number
                       },
                       domProps: { value: _vm.userData.phone_number },
                       on: {
@@ -39128,7 +39114,27 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-secondary btn-sm pull-left",
+                      attrs: { href: "/user-list" }
+                    },
+                    [_vm._v(_vm._s(_vm.lang.back))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-sm pull-right",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v(_vm._s(_vm.lang.submit))]
+                  )
+                ])
+              ])
             ])
           ]
         )
@@ -39136,34 +39142,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-secondary btn-sm pull-left",
-            attrs: { href: "/user-list" }
-          },
-          [_vm._v("Back")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm pull-right",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Submit")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -54470,13 +54449,23 @@ var removeToken = function removeToken() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
+var _id$username$email$fu;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* harmony default export */ __webpack_exports__["default"] = (_id$username$email$fu = {
   id: "ID",
   username: "Username",
   email: "Email",
   fullname: "Fullname",
-  actions: "Actions"
-});
+  actions: "Actions",
+  add: "Add",
+  remove_selected: "Remove Selected",
+  back: "Back",
+  submit: "Submit",
+  logout: "Logout",
+  login: "Login"
+}, _defineProperty(_id$username$email$fu, "email", "Email"), _defineProperty(_id$username$email$fu, "password", "Password"), _defineProperty(_id$username$email$fu, "confirm_password", "Confirm Password"), _defineProperty(_id$username$email$fu, "firstname", "Firstname"), _defineProperty(_id$username$email$fu, "lastname", "Lastname"), _defineProperty(_id$username$email$fu, "address", "Address"), _defineProperty(_id$username$email$fu, "post_code", "Post Code"), _defineProperty(_id$username$email$fu, "contact_phone_number", "Contact Phone Number"), _defineProperty(_id$username$email$fu, "user_management", "User Management"), _defineProperty(_id$username$email$fu, "create_user", "Create User"), _defineProperty(_id$username$email$fu, "edit_user_info", "Edit User Info"), _defineProperty(_id$username$email$fu, "delete_item", "Delete item?"), _defineProperty(_id$username$email$fu, "delete_selected_items", "Delete selected item(s)?"), _defineProperty(_id$username$email$fu, "user_info_updated", "User info updated."), _defineProperty(_id$username$email$fu, "user_added", "User added."), _id$username$email$fu);
 
 /***/ }),
 

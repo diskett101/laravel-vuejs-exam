@@ -1,9 +1,9 @@
 <template>
-	<div class="container">
+	<div class="container  page-content">
 		<div class="well well-sm" id="user-edit-form">
 			<form class="form-horizontal" method="post" @submit.prevent="onSubmit">
 				<fieldset>
-					<legend class="text-center">Create User</legend>
+					<legend class="text-center">{{ lang.create_user }}</legend>
 
 					<div class="form-group">
 						<label class="col-md-3 control-label" for="username">Username</label>
@@ -14,74 +14,74 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="email">Email</label>
+						<label class="col-md-3 control-label" for="email">{{ lang.email }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.email}">
-							<input id="email" v-model="userData.email" type="text" placeholder="Email" class="form-control">
+							<input id="email" v-model="userData.email" type="text" :placeholder="lang.email" class="form-control">
 							<span v-if="errors.email" class="help-block text-danger">{{ errors.email[0] }}</span>
 						</div>
 					</div>
 
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="password">Password</label>
+						<label class="col-md-3 control-label" for="password">{{ lang.password }}</label>
 						<div class="col-md-12" :class="{'has-error': errors['password']}">
-							<input id="password" v-model="userData.password" type="password" placeholder="Password" class="form-control">
+							<input id="password" v-model="userData.password" type="password" :placeholder="lang.password" class="form-control">
 							<span v-if="errors['password']" class="help-block text-danger">{{ errors.password[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="confirm_password">Confirm Password</label>
+						<label class="col-md-3 control-label" for="confirm_password">{{ lang.confirm_password }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.confirm_password}">
-							<input id="confirm_password" v-model="userData.confirm_password" type="password" placeholder="Confirm Password" class="form-control">
+							<input id="confirm_password" v-model="userData.confirm_password" type="password" :placeholder="lang.confirm_password" class="form-control">
 							<span v-if="errors.confirm_password" class="help-block text-danger">{{ errors.confirm_password[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="firstname">Firstname</label>
+						<label class="col-md-3 control-label" for="firstname">{{ lang.firstname }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.firstname}">
-							<input id="firstname" v-model="userData.firstname" type="text" placeholder="Firstname" class="form-control">
+							<input id="firstname" v-model="userData.firstname" type="text" :placeholder="lang.firstname" class="form-control">
 							<span v-if="errors.firstname" class="help-block text-danger">{{ errors.firstname[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="lastname">Lastname</label>
+						<label class="col-md-3 control-label" for="lastname">{{ lang.lastname }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.lastname}">
-							<input id="lastname" v-model="userData.lastname" type="text" placeholder="Lastname" class="form-control">
+							<input id="lastname" v-model="userData.lastname" type="text" :placeholder="lang.lastname" class="form-control">
 							<span v-if="errors.lastname" class="help-block text-danger">{{ errors.lastname[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="address">Address</label>
+						<label class="col-md-3 control-label" for="address">{{ lang.address }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.address}">
-							<input id="address" v-model="userData.address" type="text" placeholder="Address" class="form-control">
+							<input id="address" v-model="userData.address" type="text" :placeholder="lang.address" class="form-control">
 							<span v-if="errors.address" class="help-block text-danger">{{ errors.address[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="postcode">Post Code</label>
+						<label class="col-md-3 control-label" for="postcode">{{ lang.post_code }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.postcode}">
-							<input id="postcode" v-model="userData.postcode" type="text" placeholder="Post Code" class="form-control">
+							<input id="postcode" v-model="userData.postcode" type="text" :placeholder="lang.post_code" class="form-control">
 							<span v-if="errors.postcode" class="help-block text-danger">{{ errors.postcode[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="phone_number">Phone Number</label>
+						<label class="col-md-3 control-label" for="phone_number">{{ lang.contact_phone_number }}</label>
 						<div class="col-md-12" :class="{'has-error': errors.phone_number}">
-							<input id="phone_number" v-model="userData.phone_number" type="text" placeholder="Phone Number" class="form-control">
+							<input id="phone_number" v-model="userData.phone_number" type="text" :placeholder="lang.contact_phone_number" class="form-control">
 							<span v-if="errors.phone_number" class="help-block text-danger">{{ errors.phone_number[0] }}</span>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-12">
-							<a href="/user-list" class="btn btn-secondary btn-sm pull-left">Back</a>
-							<button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
+							<a href="/user-list" class="btn btn-secondary btn-sm pull-left">{{ lang.back }}</a>
+							<button type="submit" class="btn btn-primary btn-sm pull-right">{{ lang.submit }}</button>
 						</div>
 					</div>
 				</fieldset>
