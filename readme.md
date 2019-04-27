@@ -71,3 +71,7 @@
  - Redis 5.0
  - MySQL 5.7
 
+
+### Notes:
+ - The cluster's MySQL might not work on the first few runs, just restart the cluster until it runs properly.
+
