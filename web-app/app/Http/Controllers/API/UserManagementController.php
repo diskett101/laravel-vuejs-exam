@@ -40,13 +40,13 @@ class UserManagementController extends Controller
     public function store(Request $request)
     {
         $post_rules = [
-            'username' => 'required|min:4|max:50|unique:users',
+            'username' => 'required|min:8|max:50|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|max:50',
             'confirm_password' => 'required|min:8|max:50',
             'firstname' => 'required|min:3|max:50',
             'lastname' => 'required|min:3|max:50',
-            'address' => 'required|min:5|max:255',
+            'address' => 'required|min:10|max:255',
             'postcode' => 'required|min:4|integer',
             'phone_number' => 'required|min:7|integer',
         ];
@@ -112,7 +112,7 @@ class UserManagementController extends Controller
             'confirm_password' => 'min:8|max:50',
             'firstname' => 'min:3|max:50',
             'lastname' => 'min:3|max:50',
-            'address' => 'min:5|max:255',
+            'address' => 'min:10|max:255',
             'postcode' => 'min:4|integer',
             'phone_number' => 'min:7|integer',
         ];
