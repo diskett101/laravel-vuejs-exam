@@ -178,10 +178,10 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $user = User::find($id);
-        $token_header = $request->header('token');
+        $token_header = "token_" . $request->header('token');
         $requesting_user_id = Redis::get($token_header);
         if ($id != $requesting_user_id) {
             // IF not requesting user's id
@@ -196,7 +196,7 @@ class UserManagementController extends Controller
    public function remove_selected(Request $request)
    {
         if ($request->has('ids')) {
-            $token_header = $request->header('token');
+            $token_header = "token_" . $request->header('token');
             $requesting_user_id = Redis::get($token_header);
             $ids_qs = $request->input('ids');
             $ids = explode(',', $ids_qs);
