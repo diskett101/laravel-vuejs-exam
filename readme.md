@@ -11,7 +11,7 @@
 ## Steps to run the app
  - Clone this repository
     ```
-    git clone <repository-url>
+    git clone https://github.com/melvinempleo/laravel-vuejs-exam.git
     ```
  - Go into the root directory of the repo:
     ```
