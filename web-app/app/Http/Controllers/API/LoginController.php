@@ -36,14 +36,15 @@ class LoginController extends Controller
 					'error' => "Unauthorized, user type denied."
 				], 401);
 			}
-			$token = "token_" . base64_encode(uniqid());
+			$raw_token = base64_encode(uniqid());
+			$token = "token_" . $raw_token;
 			Token::create([
 				'user_id' => $user->id,
 				'token' => $token
 			]);
 			Redis::setex($token, 604800, $user->id);
 			return Response::json([
-				'token' => $token
+				'token' => $raw_token
 			], 200);
 		} else {
 			return Response::json([
@@ -54,7 +55,7 @@ class LoginController extends Controller
 	public function logout(Request $request)
 	{
 		$token_header = $request->header('token');
-		Redis::del($token_header);
+		Redis::del("token_" .$token_header);
 		return Response::json([], 204);
 	}
 }

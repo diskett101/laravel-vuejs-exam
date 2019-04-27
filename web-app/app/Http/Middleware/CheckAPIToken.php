@@ -17,7 +17,8 @@ class CheckAPIToken
      */
     public function handle($request, Closure $next)
     {
-        $token_header = $request->header('token');
+        $raw_token_header = $request->header('token');
+        $token_header = "token_" . $raw_token_header;
         if (empty($token_header)) {
             return Response::json([
                 'error' => 'Unauthorized'
