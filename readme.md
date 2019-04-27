@@ -63,6 +63,7 @@
 ## Sample Account
  - Email: melvin.empleo.test@gmail.com
  - Password: admin123
+ - User type: admin
 
 ## Cluster Components
  - Ubuntu-based image for the web app

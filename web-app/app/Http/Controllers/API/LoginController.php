@@ -33,7 +33,7 @@ class LoginController extends Controller
 			$user = $request->user();
 			if ($user->user_type != User::$user_types['admin']['code']) {
 				return Response::json([
-					'error' => "Unauthorized"
+					'error' => "Unauthorized, user type denied."
 				], 401);
 			}
 			$token = "token_" . base64_encode(uniqid());
