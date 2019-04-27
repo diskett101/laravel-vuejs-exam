@@ -3,7 +3,7 @@
 
 ## Software prerequisites
  - Depending on your operating system, install docker: https://docs.docker.com/install/.
- - Also if still needed, install "docker-compose": https://docs.docker.com/compose/install/
+ - Also if still needed separate installation, install "docker-compose": https://docs.docker.com/compose/install/
  - Install composer: https://getcomposer.org/download/
  - Install NodeJS (with NPM) https://nodejs.org/en/download/
  - Install git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
